@@ -1,0 +1,112 @@
+{
+  "name": "custom.remote.python.nimble",
+  "version": "1.0",
+  "type": "python",
+  "entity": "CUSTOM_DEVICE",
+  "processTypeNames": ["PYTHON"],
+  "technologies": ["HPE Nimble Storage"],
+  "favicon": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/Hewlett_Packard_Enterprise_logo.svg/2000px-Hewlett_Packard_Enterprise_logo.svg.png",
+  "source": {
+    "package": "nimble_activegate_plugin",
+    "className": "NimblePluginRemote",
+    "install_requires": ["requests>=2.6.0"],
+    "activation": "Remote"
+  },
+  "metrics": [
+    {
+      "entity": "CUSTOM_DEVICE",
+      "timeseries": {
+        "key": "warn_level",
+        "unit": "Count",
+        "displayname": "Warning level"
+      }
+    },
+    {
+      "entity": "CUSTOM_DEVICE",
+      "timeseries": {
+        "key": "online",
+        "unit": "Count",
+        "displayname": "Online status"
+      }
+    }
+  ],
+    "properties" : [
+    {
+	  "key" : "url",
+      "type" :  "String"
+    },
+    {
+      "key" : "username",
+        "type" :  "String"
+    },
+    {
+      "key" : "password",
+        "type" :  "Password"
+    }      
+  ],
+  "configUI": {
+        "displayName": "ActiveGate Nimble Storage Plugin",
+        "properties": [
+			{"key" : "url",
+			"displayName" :  "URL",
+      "displayHint": "http://localhost:5392" },
+      {"key" : "username",
+        "displayName" :  "Username",
+        "displayHint": "root" },
+      {"key" : "password",
+			"displayName" :  "Password"
+			}  
+	  ]
+    },
+     "ui": {
+       "keymetrics" : [
+      {
+        "key": "warn_level",
+        "aggregation": "avg",
+        "mergeaggregation": "avg",
+        "displayname": "Warning level"
+      },
+      {
+        "key": "online",
+        "aggregation": "avg",
+        "mergeaggregation": "avg",
+        "displayname": "Online"
+      }
+    ],
+        "charts": [
+            {
+                "group": "Nimble",
+                "title": "Performance metrics",
+                "description": "Metrics pulled straight from the Nimble storage array.",
+                "explanation": "Not used",
+                "link": "https://www.hpe.com/uk/en/storage/nimble.html",
+                "series": [
+                    {
+                        "key": "warn_level",
+                        "displayname": "Warning level",
+                        "aggregation": "avg",
+                        "mergeaggregation": "avg",
+                        "color": "#00a6fb",
+                        "seriestype": "line",
+                        "rightaxis": false,
+                        "stacked": false,
+                        "unit": "Count",
+                        "metricexplanation": "Warning level of the storage volume"
+                    },
+                    {
+                        "key": "online",
+                        "displayname": "Online",
+                        "aggregation": "avg",
+                        "mergeaggregation": "avg",
+                        "color": "#008cdb",
+                        "seriestype": "line",
+                        "rightaxis": false,
+                        "stacked": false,
+                        "unit": "Count",
+                        "metricexplanation": "Online status of the storage volume."
+                    }
+                ]
+            }
+        ]
+    }
+}
